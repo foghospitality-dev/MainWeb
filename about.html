@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About — F.O.G Hospitality Consultants</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-hero {
+  background: var(--dark); padding: 10rem 4rem 5rem; position: relative; overflow: hidden;
+}
+.page-hero::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(61,139,94,0.4), transparent);
+}
+.page-hero-eyebrow {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--green-light); font-weight: 500; margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-hero-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--green); }
+.page-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 72px); font-weight: 400; color: #fff; line-height: 1.1; max-width: 660px;
+}
+.page-hero h1 em { font-style: italic; color: var(--green-light); }
+.page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.6); max-width: 500px; margin-top: 1.25rem; line-height: 1.8; }
+
+/* Name meaning */
+.name-section { background: var(--stone); padding: 5rem 4rem; }
+.name-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 3rem; background: var(--border); border-radius: 10px; overflow: hidden; }
+.name-card { background: var(--white); padding: 2.5rem 2rem; }
+.name-card .letter {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px; font-weight: 300; color: var(--pale);
+  line-height: 1; margin-bottom: 0.5rem;
+}
+.name-card h3 { font-size: 18px; font-weight: 500; color: var(--dark); margin-bottom: 0.5rem; }
+.name-card p { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
+
+/* Mission */
+.mission-section { background: var(--white); padding: 6rem 4rem; }
+.mission-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start; }
+.mission-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 3vw, 38px); font-weight: 300; font-style: italic;
+  color: var(--dark); line-height: 1.4;
+  border-left: 3px solid var(--green); padding-left: 2rem;
+  position: sticky; top: 6rem;
+}
+.mission-body p { font-size: 15px; color: var(--ink-soft); line-height: 1.85; }
+.mission-body p + p { margin-top: 1.25rem; }
+
+/* Values */
+.values-section { background: var(--dark); padding: 6rem 4rem; }
+.values-section .section-title { color: #fff; }
+.values-section .section-title em { color: var(--green-light); }
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; margin-top: 3rem; background: rgba(255,255,255,0.06); border-radius: 10px; overflow: hidden; }
+.value-card { background: var(--dark); padding: 2.5rem 2rem; transition: background 0.2s; }
+.value-card:hover { background: rgba(61,139,94,0.1); }
+.value-icon { font-size: 28px; margin-bottom: 1rem; }
+.value-card h3 { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 0.5rem; }
+.value-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+/* CTA */
+.cta-strip {
+  background: var(--green); padding: 5rem 4rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;
+}
+.cta-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 50px); font-weight: 400; color: #fff; line-height: 1.2; }
+.cta-strip h2 em { font-style: italic; }
+.btn-white { background: #fff; color: var(--dark); padding: 0.9rem 2.2rem; border-radius: 7px; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.2s; font-family: 'DM Sans', sans-serif; }
+.btn-white:hover { opacity: 0.88; }
+
+@media (max-width: 768px) {
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .name-section, .mission-section, .values-section { padding: 4rem 1.5rem; }
+  .name-grid { grid-template-columns: 1fr; }
+  .mission-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .mission-quote { position: static; }
+  .cta-strip { padding: 4rem 1.5rem; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><circle cx="26" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><line x1="23" y1="20" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="20" r="2.5" fill="#3D8B5E"/><circle cx="26" cy="20" r="2.5" fill="#3D8B5E"/></svg>
+    <div class="nav-brand">
+      <span class="nav-brand-name">F.O.G</span>
+      <span class="nav-brand-sub">Forward Observations Group</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html" class="active">About</a>
+    <a href="contact.html" class="nav-cta">Get in Touch</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-eyebrow">Who we are</div>
+  <h1>Independent expertise.<br/><em>No agenda but yours.</em></h1>
+  <p class="page-hero-sub">F.O.G was founded on a simple belief: hotels deserve honest, expert advice about their technology — not a sales pitch.</p>
+</div>
+
+<!-- NAME MEANING -->
+<div class="name-section">
+  <div class="section-tag">The name</div>
+  <h2 class="section-title">What F.O.G stands for</h2>
+  <div class="name-grid">
+    <div class="name-card">
+      <div class="letter">F</div>
+      <h3>Forward</h3>
+      <p>We look ahead — anticipating what your hotel will need, not just what it needs today.</p>
+    </div>
+    <div class="name-card">
+      <div class="letter">O</div>
+      <h3>Observations</h3>
+      <p>We survey, assess, and analyse before we advise. Every recommendation is grounded in what we actually find.</p>
+    </div>
+    <div class="name-card">
+      <div class="letter">G</div>
+      <h3>Group</h3>
+      <p>A collective of hospitality and technology expertise, working together for one client at a time.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<section class="mission-section">
+  <div class="mission-inner">
+    <div class="mission-quote">"Hotels know their connectivity isn't working. They just don't know who to trust to fix it."</div>
+    <div class="mission-body">
+      <p>The hospitality technology industry has a problem. The people selling solutions — vendors, resellers, managed service providers — all have a product to push. And most hotel operators don't have the technical knowledge to cut through the noise.</p>
+      <p>The result is hotels spending money on the wrong equipment, signing contracts they don't fully understand, and still having guests complain about the Wi-Fi six months later.</p>
+      <p>F.O.G was built to change that. We're independent consultants — we don't sell hardware, we don't take vendor commissions, and we have no referral agreements. Our only job is to understand your property and tell you exactly what it needs.</p>
+      <p>We started in hospitality connectivity because it's where the gap is biggest and the impact is most immediate. A well-designed network transforms the guest experience, reduces operational headaches, and removes a constant source of negative reviews. It's fixable. We help you fix it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-tag" style="color:var(--green-light);">How we work</div>
+  <h2 class="section-title">What you can <em>always expect from us</em></h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <h3>Vendor neutral</h3>
+      <p>We take no commissions and have no vendor affiliations. Every recommendation is made purely in your interest.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔍</div>
+      <h3>Survey first</h3>
+      <p>We never advise without looking. Every engagement starts with a proper assessment of what you actually have.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">📋</div>
+      <h3>Clear reporting</h3>
+      <p>No jargon, no filler. You get a clear written report that tells you what needs to change and why, in plain English.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <h3>We stay with you</h3>
+      <p>We don't hand you a report and disappear. We're available through implementation to make sure it goes right.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Want to work with us?<br/><em>Let's start with a conversation.</em></h2>
+  <a href="contact.html" class="btn-white">Get in touch →</a>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">F.O.G</div>
+    <div class="footer-sub">Forward Observations Group · Hospitality Consultants</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Forward Observations Group Ltd</div>
+</footer>
+
+<script>document.getElementById('navToggle').addEventListener('click',()=>{document.getElementById('navLinks').classList.toggle('open');});</script>
+</body>
+</html>

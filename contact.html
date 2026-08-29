@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — F.O.G Hospitality Consultants</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.contact-wrap {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+
+/* LEFT — dark panel */
+.contact-left {
+  background: var(--dark);
+  padding: 10rem 4rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.contact-left::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(61,139,94,0.3), transparent);
+}
+.contact-eyebrow {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--green-light); font-weight: 500; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.contact-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--green); }
+.contact-left h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 60px); font-weight: 400; color: #fff; line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.contact-left h1 em { font-style: italic; color: var(--green-light); }
+.contact-left p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; max-width: 380px; margin-bottom: 3rem; }
+
+.contact-details { display: flex; flex-direction: column; gap: 1.25rem; }
+.contact-detail { display: flex; align-items: flex-start; gap: 1rem; }
+.cd-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: rgba(61,139,94,0.2); display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; margin-top: 2px;
+}
+.cd-body { }
+.cd-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+.cd-value { font-size: 14px; color: rgba(255,255,255,0.8); }
+.cd-value a { color: rgba(255,255,255,0.8); text-decoration: none; }
+.cd-value a:hover { color: var(--green-light); }
+
+.contact-promise {
+  margin-top: 3.5rem; padding-top: 2.5rem;
+  border-top: 0.5px solid rgba(255,255,255,0.1);
+  font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.7;
+}
+.contact-promise strong { color: rgba(255,255,255,0.6); font-weight: 500; }
+
+/* RIGHT — form panel */
+.contact-right {
+  background: var(--white);
+  padding: 10rem 4rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.contact-right h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 400; color: var(--ink); margin-bottom: 2.5rem;
+}
+
+/* FORM */
+.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-muted);
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; color: var(--ink);
+  background: var(--stone); border: 1.5px solid transparent;
+  border-radius: 7px; padding: 0.75rem 1rem;
+  transition: border-color 0.2s, background 0.2s;
+  outline: none; width: 100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--green); background: #fff;
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group select { appearance: none; cursor: pointer; }
+
+.form-submit {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 0.5rem; flex-wrap: wrap; gap: 1rem;
+}
+.form-note { font-size: 12px; color: var(--ink-muted); }
+
+.btn-submit {
+  background: var(--dark); color: #fff;
+  padding: 0.9rem 2.4rem; border-radius: 7px;
+  font-size: 14px; font-weight: 500;
+  border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-submit:hover { background: var(--dark-mid); transform: translateY(-1px); }
+
+/* Success message */
+.form-success {
+  display: none;
+  background: var(--pale); border: 1px solid var(--green);
+  border-radius: 10px; padding: 2rem;
+  text-align: center;
+}
+.form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--dark); margin-bottom: 0.5rem; }
+.form-success p { font-size: 14px; color: var(--ink-soft); }
+
+@media (max-width: 900px) {
+  .contact-wrap { grid-template-columns: 1fr; }
+  .contact-left { padding: 8rem 1.5rem 4rem; }
+  .contact-right { padding: 4rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><circle cx="26" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><line x1="23" y1="20" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="20" r="2.5" fill="#3D8B5E"/><circle cx="26" cy="20" r="2.5" fill="#3D8B5E"/></svg>
+    <div class="nav-brand">
+      <span class="nav-brand-name">F.O.G</span>
+      <span class="nav-brand-sub">Forward Observations Group</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active nav-cta">Get in Touch</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="contact-wrap">
+
+  <!-- LEFT -->
+  <div class="contact-left">
+    <div class="contact-eyebrow">Get in touch</div>
+    <h1>Let's talk about<br/><em>your hotel.</em></h1>
+    <p>Tell us about your property and what you're dealing with. We'll get back to you within one business day to arrange a free 30-minute consultation.</p>
+
+    <div class="contact-details">
+      <div class="contact-detail">
+        <div class="cd-icon">📩</div>
+        <div class="cd-body">
+          <div class="cd-label">Email</div>
+          <div class="cd-value"><a href="mailto:hello@fog-hospitality.com">hello@fog-hospitality.com</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">🌐</div>
+        <div class="cd-body">
+          <div class="cd-label">Coverage</div>
+          <div class="cd-value">UK & Europe</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">💼</div>
+        <div class="cd-body">
+          <div class="cd-label">LinkedIn</div>
+          <div class="cd-value"><a href="https://linkedin.com" target="_blank">Forward Observations Group</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-promise">
+      <strong>Our promise:</strong> We respond to every enquiry within one business day. The first consultation is always free — no commitment, no sales pitch. Just an honest conversation about what your hotel needs.
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="contact-right">
+    <h2>Tell us about your property</h2>
+
+    <div class="form-success" id="formSuccess">
+      <h3>Message received.</h3>
+      <p>Thank you for getting in touch. We'll be back in touch within one business day to arrange your free consultation.</p>
+    </div>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First name</label>
+          <input type="text" id="fname" name="fname" placeholder="Jane" required/>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last name</label>
+          <input type="text" id="lname" name="lname" placeholder="Smith" required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" placeholder="jane@yourhotel.com" required/>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="hotel">Hotel / property name</label>
+          <input type="text" id="hotel" name="hotel" placeholder="The Grand Hotel"/>
+        </div>
+        <div class="form-group">
+          <label for="rooms">Number of rooms</label>
+          <select id="rooms" name="rooms">
+            <option value="">Select...</option>
+            <option>Under 20</option>
+            <option>20–50</option>
+            <option>51–100</option>
+            <option>101–200</option>
+            <option>200+</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="interest">What are you looking for help with?</label>
+        <select id="interest" name="interest">
+          <option value="">Select a service...</option>
+          <option>Connectivity Audit (full assessment)</option>
+          <option>Wi-Fi Assessment & Design</option>
+          <option>Network Infrastructure Review</option>
+          <option>TV System Consultation</option>
+          <option>Guest Casting Advisory</option>
+          <option>Implementation Oversight</option>
+          <option>Retained Advisory</option>
+          <option>Not sure — I need advice on where to start</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Tell us more</label>
+        <textarea id="message" name="message" placeholder="Describe what you're experiencing — poor Wi-Fi, failing TV system, guests unable to cast, or anything else. The more detail the better."></textarea>
+      </div>
+
+      <div class="form-submit">
+        <span class="form-note">We'll respond within one business day.</span>
+        <button type="submit" class="btn-submit">Send message →</button>
+      </div>
+    </form>
+  </div>
+
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">F.O.G</div>
+    <div class="footer-sub">Forward Observations Group · Hospitality Consultants</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Forward Observations Group Ltd</div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // In production, connect this to Formspree, Netlify Forms, or your backend
+    this.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Services — F.O.G Hospitality Consultants</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-hero {
+  background: var(--dark);
+  padding: 10rem 4rem 5rem;
+  position: relative; overflow: hidden;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(61,139,94,0.4), transparent);
+}
+.page-hero-eyebrow {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--green-light); font-weight: 500; margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.page-hero-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--green); }
+.page-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 72px); font-weight: 400; color: #fff; line-height: 1.1;
+  max-width: 660px;
+}
+.page-hero h1 em { font-style: italic; color: var(--green-light); }
+.page-hero-sub { font-size: 16px; color: rgba(255,255,255,0.6); max-width: 500px; margin-top: 1.25rem; line-height: 1.8; }
+
+/* Stack diagram */
+.stack-section { background: var(--stone); padding: 5rem 4rem; }
+.stack-diagram {
+  max-width: 680px; margin: 3rem auto 0;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.stack-layer {
+  display: flex; align-items: center; gap: 2rem;
+  background: var(--white); border-radius: 8px; padding: 1.25rem 2rem;
+  border-left: 4px solid var(--green);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.stack-layer:hover { border-color: var(--dark); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.stack-layer-icon { font-size: 22px; min-width: 32px; text-align: center; }
+.stack-layer-body h3 { font-size: 15px; font-weight: 500; color: var(--ink); }
+.stack-layer-body p { font-size: 13px; color: var(--ink-muted); }
+.stack-arrow { text-align: center; font-size: 18px; color: var(--green); opacity: 0.5; margin: 0; }
+
+/* Services grid */
+.services-full { background: var(--white); }
+.services-full-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px; margin-top: 3.5rem;
+}
+.service-card-full {
+  border: 0.5px solid var(--border); border-radius: 12px;
+  padding: 2.5rem 2.25rem; background: var(--white);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.service-card-full:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); border-color: var(--green); }
+.scf-tag {
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--green); font-weight: 500; margin-bottom: 0.75rem;
+}
+.service-card-full h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 500; color: var(--ink); margin-bottom: 0.75rem;
+}
+.service-card-full p { font-size: 14px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
+.service-includes { list-style: none; }
+.service-includes li {
+  font-size: 13px; color: var(--ink-muted); padding: 0.4rem 0;
+  border-top: 0.5px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.service-includes li::before { content: '→'; color: var(--green); font-size: 12px; }
+.scf-price {
+  margin-top: 1.5rem; padding-top: 1.25rem; border-top: 0.5px solid var(--border);
+  font-size: 13px; color: var(--ink-muted);
+}
+.scf-price strong { color: var(--dark); font-weight: 500; }
+
+/* Process */
+.process-section { background: var(--dark); padding: 6rem 4rem; }
+.process-section .section-title { color: #fff; }
+.process-section .section-title em { color: var(--green-light); }
+.process-steps {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0; margin-top: 3.5rem;
+}
+.process-step {
+  padding: 2rem 1.75rem;
+  border-right: 0.5px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+.process-step:last-child { border-right: none; }
+.ps-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 300; color: rgba(255,255,255,0.07);
+  line-height: 1; margin-bottom: 1rem;
+}
+.process-step h3 { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 0.5rem; }
+.process-step p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
+
+/* CTA */
+.cta-strip {
+  background: var(--green); padding: 5rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 2rem;
+}
+.cta-strip h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 50px); font-weight: 400; color: #fff; line-height: 1.2;
+}
+.cta-strip h2 em { font-style: italic; }
+.btn-white {
+  background: #fff; color: var(--dark);
+  padding: 0.9rem 2.2rem; border-radius: 7px;
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  transition: opacity 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.btn-white:hover { opacity: 0.88; }
+
+@media (max-width: 768px) {
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .stack-section, .services-full, .process-section { padding: 4rem 1.5rem; }
+  .process-steps { grid-template-columns: 1fr; }
+  .process-step { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
+  .cta-strip { padding: 4rem 1.5rem; flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><circle cx="26" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><line x1="23" y1="20" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="20" r="2.5" fill="#3D8B5E"/><circle cx="26" cy="20" r="2.5" fill="#3D8B5E"/></svg>
+    <div class="nav-brand">
+      <span class="nav-brand-name">F.O.G</span>
+      <span class="nav-brand-sub">Forward Observations Group</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta">Get in Touch</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-eyebrow">What we do</div>
+  <h1>Every layer of your hotel's <em>connectivity, covered.</em></h1>
+  <p class="page-hero-sub">We don't just look at your Wi-Fi. We assess the full stack — because each layer depends on the one below it.</p>
+</div>
+
+<!-- STACK -->
+<div class="stack-section">
+  <div class="section-tag">The connectivity stack</div>
+  <h2 class="section-title">Four layers. One assessment.</h2>
+  <div class="stack-diagram">
+    <div class="stack-layer">
+      <div class="stack-layer-icon">📺</div>
+      <div class="stack-layer-body">
+        <h3>In-Room TV System</h3>
+        <p>IPTV, smart TV platform, content — what guests see and interact with</p>
+      </div>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer">
+      <div class="stack-layer-icon">📱</div>
+      <div class="stack-layer-body">
+        <h3>Casting & Streaming</h3>
+        <p>Chromecast, Airplay, BYOD — guests streaming their own content</p>
+      </div>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer">
+      <div class="stack-layer-icon">📶</div>
+      <div class="stack-layer-body">
+        <h3>Wi-Fi</h3>
+        <p>Coverage, speed, guest/staff separation — the guest-facing experience</p>
+      </div>
+    </div>
+    <div class="stack-arrow">↓</div>
+    <div class="stack-layer">
+      <div class="stack-layer-icon">🌐</div>
+      <div class="stack-layer-body">
+        <h3>Network Infrastructure</h3>
+        <p>Cabling, switching, routing, ISP — everything else depends on this</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section services-full">
+  <div class="section-tag">Our services</div>
+  <h2 class="section-title">What we offer</h2>
+  <div class="services-full-grid">
+
+    <div class="service-card-full">
+      <div class="scf-tag">Foundation</div>
+      <h3>Connectivity Audit</h3>
+      <p>A full on-site assessment of your entire connectivity stack — network, Wi-Fi, cabling, TV system, and casting capability. The starting point for almost every engagement.</p>
+      <ul class="service-includes">
+        <li>On-site survey of all connectivity layers</li>
+        <li>Wi-Fi coverage and speed mapping</li>
+        <li>Network architecture review</li>
+        <li>TV and casting system assessment</li>
+        <li>Written report with prioritised recommendations</li>
+      </ul>
+      <div class="scf-price">From <strong>£2,500</strong></div>
+    </div>
+
+    <div class="service-card-full">
+      <div class="scf-tag">Wi-Fi</div>
+      <h3>Wi-Fi Assessment & Design</h3>
+      <p>Deep-dive into your wireless network — identifying dead zones, interference, overcrowded channels, and access point placement issues, with a full redesign specification.</p>
+      <ul class="service-includes">
+        <li>Heatmap coverage survey</li>
+        <li>Channel and interference analysis</li>
+        <li>Guest vs staff VLAN review</li>
+        <li>Access point placement recommendations</li>
+        <li>Hardware specification if upgrade needed</li>
+      </ul>
+      <div class="scf-price">From <strong>£1,500</strong></div>
+    </div>
+
+    <div class="service-card-full">
+      <div class="scf-tag">Infrastructure</div>
+      <h3>Network Infrastructure Review</h3>
+      <p>Assessment of your physical and logical network — cabling, switching, routing, firewall, and segmentation — to identify risks, bottlenecks, and areas for improvement.</p>
+      <ul class="service-includes">
+        <li>Cabling and patch panel inspection</li>
+        <li>Switch and router configuration review</li>
+        <li>Network segmentation and security assessment</li>
+        <li>ISP connection and redundancy review</li>
+        <li>Infrastructure upgrade roadmap</li>
+      </ul>
+      <div class="scf-price">From <strong>£2,000</strong></div>
+    </div>
+
+    <div class="service-card-full">
+      <div class="scf-tag">Entertainment</div>
+      <h3>TV System Consultation</h3>
+      <p>Review of your existing in-room TV or IPTV setup and an independent recommendation of modern, future-proof alternatives suited to your property type and budget.</p>
+      <ul class="service-includes">
+        <li>Existing system audit (IPTV, coax, smart TV)</li>
+        <li>Content and channel requirements review</li>
+        <li>Vendor-neutral platform comparison</li>
+        <li>Migration and upgrade pathway</li>
+        <li>Budget and ROI assessment</li>
+      </ul>
+      <div class="scf-price">From <strong>£1,500</strong></div>
+    </div>
+
+    <div class="service-card-full">
+      <div class="scf-tag">Streaming</div>
+      <h3>Guest Casting Advisory</h3>
+      <p>Independent evaluation of guest casting platforms — Chromecast for Hotels, Allbridge, Otrum, and others — to find the right fit for your property, guests, and infrastructure.</p>
+      <ul class="service-includes">
+        <li>Requirements and guest profile assessment</li>
+        <li>Platform shortlisting and comparison</li>
+        <li>Demo and proof-of-concept support</li>
+        <li>Network readiness check for casting</li>
+        <li>Implementation brief for your installer</li>
+      </ul>
+      <div class="scf-price">From <strong>£1,500</strong></div>
+    </div>
+
+    <div class="service-card-full">
+      <div class="scf-tag">Project</div>
+      <h3>Implementation Oversight</h3>
+      <p>Once you know what you need, we stay with you through rollout — managing vendor relationships, timelines, and quality assurance on your behalf.</p>
+      <ul class="service-includes">
+        <li>Vendor and contractor briefing</li>
+        <li>Project timeline and milestone management</li>
+        <li>On-site quality checks during installation</li>
+        <li>Testing and sign-off support</li>
+        <li>Handover documentation</li>
+      </ul>
+      <div class="scf-price">From <strong>£5,000</strong></div>
+    </div>
+
+    <div class="service-card-full">
+      <div class="scf-tag">Ongoing</div>
+      <h3>Retained Advisory</h3>
+      <p>For hotel groups or properties that want a trusted connectivity expert in their corner on an ongoing basis — for strategy, renewals, new openings, and emerging technology.</p>
+      <ul class="service-includes">
+        <li>Monthly check-ins and strategy calls</li>
+        <li>Vendor contract and renewal support</li>
+        <li>New property and refurbishment advisory</li>
+        <li>Technology roadmap planning</li>
+        <li>Priority response for urgent issues</li>
+      </ul>
+      <div class="scf-price">From <strong>£1,000/month</strong></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-tag" style="color:var(--green-light);">How it works</div>
+  <h2 class="section-title">Simple. <em>No surprises.</em></h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="ps-num">01</div>
+      <h3>Free consultation</h3>
+      <p>A 30-minute call to understand your property, your problems, and what you're trying to achieve.</p>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">02</div>
+      <h3>On-site survey</h3>
+      <p>We visit your property and assess your connectivity stack from the ground up.</p>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">03</div>
+      <h3>Clear report</h3>
+      <p>A written report with prioritised recommendations — no jargon, no filler, just what you need to do.</p>
+    </div>
+    <div class="process-step">
+      <div class="ps-num">04</div>
+      <h3>Guided implementation</h3>
+      <p>We help you choose vendors, manage the project, and make sure it's done right.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Not sure where to start?<br/><em>Start with a free call.</em></h2>
+  <a href="contact.html" class="btn-white">Book a free consultation →</a>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">F.O.G</div>
+    <div class="footer-sub">Forward Observations Group · Hospitality Consultants</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Forward Observations Group Ltd</div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

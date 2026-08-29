@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>F.O.G — Forward Observations Group | Hospitality Consultants</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--dark);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 10rem 4rem 6rem;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 45%;
+  background: linear-gradient(135deg, transparent 40%, rgba(61,139,94,0.12) 100%);
+  pointer-events: none;
+}
+/* Crosshair accent */
+.hero-crosshair {
+  position: absolute; right: 12%; top: 50%; transform: translateY(-50%);
+  width: 180px; height: 180px; opacity: 0.07;
+}
+
+.hero-eyebrow {
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--green-light); font-weight: 500; margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: ''; display: inline-block; width: 32px; height: 1px; background: var(--green); }
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 400; line-height: 1.05; color: #fff;
+  max-width: 720px; margin-bottom: 1.75rem;
+}
+.hero h1 em { font-style: italic; color: var(--green-light); }
+
+.hero-sub {
+  font-size: 17px; color: rgba(255,255,255,0.65);
+  max-width: 500px; line-height: 1.8; margin-bottom: 3rem;
+}
+
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.btn-hero {
+  background: var(--green); color: #fff;
+  padding: 0.9rem 2.2rem; border-radius: 7px;
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-hero:hover { background: var(--dark-mid); transform: translateY(-1px); }
+.btn-hero-ghost {
+  color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 400;
+  text-decoration: none; display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s, gap 0.2s;
+}
+.btn-hero-ghost:hover { color: #fff; gap: 10px; }
+
+/* Stats bar */
+.hero-stats {
+  display: flex; gap: 4rem; margin-top: 5rem;
+  padding-top: 3rem; border-top: 0.5px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+.hero-stat h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px; font-weight: 300; color: var(--green-light); line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat p { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
+
+/* ── INTRO STRIP ── */
+.intro-strip {
+  background: var(--stone);
+  padding: 4rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
+}
+.intro-strip blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 34px); font-weight: 300; font-style: italic;
+  color: var(--dark); line-height: 1.4;
+  border-left: 3px solid var(--green); padding-left: 2rem;
+}
+.intro-strip p { font-size: 15px; color: var(--ink-soft); line-height: 1.8; }
+.intro-strip p + p { margin-top: 1rem; }
+
+/* ── PROBLEM ── */
+.problem { background: var(--white); }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1px; margin-top: 3.5rem;
+  background: var(--border); border-radius: 12px; overflow: hidden;
+}
+.problem-card {
+  background: var(--white); padding: 2.5rem 2rem;
+  transition: background 0.2s;
+}
+.problem-card:hover { background: var(--pale); }
+.problem-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300; color: var(--pale);
+  line-height: 1; margin-bottom: 1rem;
+}
+.problem-card h3 { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; }
+.problem-card p { font-size: 14px; color: var(--ink-muted); line-height: 1.7; }
+
+/* ── SERVICES PREVIEW ── */
+.services-preview { background: var(--dark); color: #fff; }
+.services-preview .section-title { color: #fff; }
+.services-preview .section-title em { color: var(--green-light); }
+.services-preview .section-sub { color: rgba(255,255,255,0.6); }
+.services-preview-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; margin-top: 3.5rem;
+}
+.service-preview-card {
+  border: 0.5px solid rgba(255,255,255,0.1); border-radius: 10px;
+  padding: 2rem 1.75rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.service-preview-card:hover { border-color: var(--green); background: rgba(61,139,94,0.08); }
+.spc-icon { font-size: 24px; margin-bottom: 1rem; }
+.service-preview-card h3 { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 0.5rem; }
+.service-preview-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+.services-preview-cta { margin-top: 2.5rem; }
+
+/* ── CTA STRIP ── */
+.cta-strip {
+  background: var(--green); padding: 5rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 2rem;
+}
+.cta-strip h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 50px); font-weight: 400; color: #fff; line-height: 1.2;
+}
+.cta-strip h2 em { font-style: italic; }
+.btn-white {
+  background: #fff; color: var(--dark);
+  padding: 0.9rem 2.2rem; border-radius: 7px;
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  white-space: nowrap; transition: opacity 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-white:hover { opacity: 0.88; }
+
+@media (max-width: 768px) {
+  .hero { padding: 8rem 1.5rem 4rem; }
+  .intro-strip { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 2rem; }
+  .cta-strip { padding: 4rem 1.5rem; flex-direction: column; }
+  .hero-stats { gap: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="14" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/>
+      <circle cx="26" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/>
+      <line x1="23" y1="20" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="14" cy="20" r="2.5" fill="#3D8B5E"/>
+      <circle cx="26" cy="20" r="2.5" fill="#3D8B5E"/>
+    </svg>
+    <div class="nav-brand">
+      <span class="nav-brand-name">F.O.G</span>
+      <span class="nav-brand-sub">Forward Observations Group</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html" class="active">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta">Get in Touch</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-crosshair" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="90" cy="90" r="80" stroke="white" stroke-width="1"/>
+    <circle cx="90" cy="90" r="50" stroke="white" stroke-width="1"/>
+    <circle cx="90" cy="90" r="8" stroke="white" stroke-width="1"/>
+    <line x1="90" y1="0" x2="90" y2="180" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="90" x2="180" y2="90" stroke="white" stroke-width="0.5"/>
+  </svg>
+
+  <div class="hero-eyebrow">Hospitality Connectivity Consultants</div>
+  <h1>Your hotel's connectivity,<br/><em>finally sorted.</em></h1>
+  <p class="hero-sub">F.O.G helps hotels understand exactly what their network, Wi-Fi, TV, and casting systems need — and guides them through fixing it, independently.</p>
+  <div class="hero-actions">
+    <a href="contact.html" class="btn-hero">Book a Free Consultation</a>
+    <a href="services.html" class="btn-hero-ghost">See our services →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><h3>0</h3><p>Vendor commissions taken</p></div>
+    <div class="hero-stat"><h3>4</h3><p>Connectivity layers we cover</p></div>
+    <div class="hero-stat"><h3>100%</h3><p>Independent advice</p></div>
+  </div>
+</section>
+
+<!-- INTRO -->
+<div class="intro-strip">
+  <blockquote>"Poor Wi-Fi is the number one complaint in hotel reviews — and it's almost always a fixable infrastructure problem."</blockquote>
+  <div>
+    <p>Most hotels know their connectivity isn't good enough. Guests mention it in reviews, staff work around it daily, and the quick fixes never stick.</p>
+    <p>The problem is that the people selling solutions have a product to push. F.O.G doesn't. We survey what you have, tell you what you need, and help you get there — on your terms.</p>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="section problem">
+  <div class="section-tag">The problem</div>
+  <h2 class="section-title">What's holding most hotels back</h2>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-num">01</div>
+      <h3>Weak Wi-Fi</h3>
+      <p>Outdated access points, dead zones, and no separation between guest and staff networks. The most complained-about issue in hotel reviews, globally.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">02</div>
+      <h3>No casting capability</h3>
+      <p>Guests want to stream Netflix, Disney+, and Spotify on the room TV. Most hotels have no casting solution — or one that doesn't reliably work.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">03</div>
+      <h3>Outdated TV systems</h3>
+      <p>Legacy IPTV or coaxial systems that can't support modern content, smart features, or casting integration — and are expensive to maintain.</p>
+    </div>
+    <div class="problem-card">
+      <div class="problem-num">04</div>
+      <h3>Ageing infrastructure</h3>
+      <p>Old cabling, flat network architecture, and no documentation. Everything above depends on this foundation — and most hotels don't know what they're built on.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section class="section services-preview">
+  <div class="section-tag">What we do</div>
+  <h2 class="section-title">The full connectivity <em>stack, covered.</em></h2>
+  <p class="section-sub">We assess and advise across every layer — because a casting system will never work reliably on a poor Wi-Fi network.</p>
+  <div class="services-preview-grid">
+    <div class="service-preview-card">
+      <div class="spc-icon">📶</div>
+      <h3>Wi-Fi Assessment</h3>
+      <p>Coverage mapping, speed testing, interference analysis, and a clear redesign specification.</p>
+    </div>
+    <div class="service-preview-card">
+      <div class="spc-icon">🌐</div>
+      <h3>Network Infrastructure</h3>
+      <p>Cabling, switching, routing, and VLAN structure — the foundation everything else depends on.</p>
+    </div>
+    <div class="service-preview-card">
+      <div class="spc-icon">📺</div>
+      <h3>TV & IPTV Systems</h3>
+      <p>Review of your existing setup and recommendation of modern, future-proof alternatives.</p>
+    </div>
+    <div class="service-preview-card">
+      <div class="spc-icon">📱</div>
+      <h3>Guest Casting</h3>
+      <p>Neutral evaluation of casting platforms so guests can stream their own content seamlessly.</p>
+    </div>
+  </div>
+  <div class="services-preview-cta">
+    <a href="services.html" class="btn-hero">View all services</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Ready to fix your hotel's<br/><em>connectivity for good?</em></h2>
+  <a href="contact.html" class="btn-white">Book a free consultation →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">F.O.G</div>
+    <div class="footer-sub">Forward Observations Group · Hospitality Consultants</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Forward Observations Group Ltd</div>
+</footer>
+
+<script>
+  document.getElementById('navToggle').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

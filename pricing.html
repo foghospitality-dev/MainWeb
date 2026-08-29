@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing Calculator — F.O.G Hospitality Consultants</title>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.page-hero {
+  background: var(--dark); padding: 10rem 4rem 5rem; position: relative; overflow: hidden;
+}
+.page-hero::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(61,139,94,0.4), transparent);
+}
+.page-hero-eyebrow {
+  font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--green-light); font-weight:500; margin-bottom:1.25rem;
+  display:flex; align-items:center; gap:10px;
+}
+.page-hero-eyebrow::before { content:''; display:inline-block; width:28px; height:1px; background:var(--green); }
+.page-hero h1 {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(38px,5.5vw,66px); font-weight:400; color:#fff; line-height:1.1; max-width:620px;
+}
+.page-hero h1 em { font-style:italic; color:var(--green-light); }
+.page-hero-sub { font-size:16px; color:rgba(255,255,255,0.6); max-width:480px; margin-top:1.25rem; line-height:1.8; }
+
+/* ── CALCULATOR SECTION ── */
+.calc-section { background:var(--stone); padding:5rem 4rem; }
+.calc-wrap {
+  display:grid; grid-template-columns:1fr 380px; gap:3rem; align-items:start; max-width:1100px;
+}
+
+/* LEFT — explanation */
+.calc-explain h2 {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(28px,3.5vw,42px); font-weight:400; color:var(--ink); margin-bottom:1rem; line-height:1.2;
+}
+.calc-explain p { font-size:15px; color:var(--ink-soft); line-height:1.8; margin-bottom:1rem; }
+.calc-note {
+  background:var(--white); border:0.5px solid var(--border);
+  border-left:3px solid var(--green); border-radius:0 8px 8px 0;
+  padding:1.25rem 1.5rem; margin-top:2rem;
+}
+.calc-note h3 { font-size:14px; font-weight:500; color:var(--dark); margin-bottom:0.5rem; }
+.calc-note ul { list-style:none; padding:0; }
+.calc-note ul li {
+  font-size:13px; color:var(--ink-soft); padding:0.3rem 0;
+  display:flex; align-items:flex-start; gap:8px;
+}
+.calc-note ul li::before { content:'→'; color:var(--green); font-size:12px; margin-top:2px; flex-shrink:0; }
+
+.download-link {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; color:var(--dark); font-weight:500;
+  text-decoration:none; margin-top:2rem;
+  border-bottom:1px solid var(--green); padding-bottom:2px;
+  transition:color 0.2s;
+}
+.download-link:hover { color:var(--green); }
+
+/* RIGHT — calculator card */
+.calc-card {
+  background:var(--white); border:0.5px solid var(--border);
+  border-radius:16px; padding:2rem; position:sticky; top:7rem;
+  box-shadow:0 4px 32px rgba(0,0,0,0.06);
+}
+.calc-card h3 { font-size:17px; font-weight:500; color:var(--ink); margin-bottom:4px; }
+.calc-card > p { font-size:13px; color:var(--ink-muted); margin-bottom:1.5rem; }
+
+.size-label { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-muted); margin-bottom:8px; }
+.size-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1.5rem; }
+.size-btn {
+  background:var(--stone); border:1.5px solid transparent;
+  border-radius:8px; padding:10px 12px; cursor:pointer;
+  font-size:13px; color:var(--ink); text-align:left;
+  transition:border-color 0.15s, background 0.15s; font-family:inherit;
+}
+.size-btn .size-name { font-weight:500; display:block; font-size:13px; }
+.size-btn .size-rooms { font-size:11px; color:var(--ink-muted); display:block; margin-top:2px; }
+.size-btn.active { border-color:var(--green); background:var(--pale); }
+
+.services-list { display:flex; flex-direction:column; gap:6px; margin-bottom:1.5rem; }
+.service-row {
+  display:flex; align-items:center; gap:10px;
+  background:var(--stone); border:1.5px solid transparent;
+  border-radius:8px; padding:10px 12px; cursor:pointer;
+  transition:border-color 0.15s, background 0.15s;
+}
+.service-row.active { border-color:var(--green); background:var(--pale); }
+.service-row input[type=checkbox] { accent-color:var(--green); width:15px; height:15px; flex-shrink:0; cursor:pointer; }
+.svc-info { flex:1; }
+.svc-name { font-size:13px; font-weight:500; color:var(--ink); }
+.svc-desc { font-size:11px; color:var(--ink-muted); margin-top:1px; }
+.svc-price { font-size:12px; font-weight:500; color:var(--green); white-space:nowrap; }
+
+.calc-divider { height:0.5px; background:var(--border); margin:1.25rem 0; }
+
+.summary { background:var(--stone); border-radius:10px; padding:1.25rem; margin-bottom:1rem; }
+.summary-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; }
+.summary-row span:first-child { font-size:12px; color:var(--ink-soft); }
+.summary-row span:last-child { font-size:12px; font-weight:500; color:var(--ink); }
+.summary-total { display:flex; justify-content:space-between; align-items:baseline; padding-top:10px; margin-top:8px; border-top:0.5px solid var(--border); }
+.summary-total span:first-child { font-size:13px; font-weight:500; color:var(--ink); }
+.total-range { font-size:20px; font-weight:500; color:var(--green); }
+.empty-msg { font-size:13px; color:var(--ink-muted); text-align:center; padding:1rem 0; }
+
+.cta-note { font-size:11px; color:var(--ink-muted); line-height:1.6; margin-bottom:1rem; }
+.enquire-btn {
+  width:100%; padding:12px; border-radius:8px;
+  background:var(--dark); color:#fff;
+  font-size:14px; font-weight:500; border:none; cursor:pointer;
+  font-family:inherit; transition:background 0.2s;
+  text-decoration:none; display:block; text-align:center;
+}
+.enquire-btn:hover { background:var(--dark-mid); }
+
+/* ── FAQ ── */
+.faq-section { background:var(--white); padding:5rem 4rem; }
+.faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:3rem; max-width:900px; }
+.faq-item { }
+.faq-item h3 { font-size:15px; font-weight:500; color:var(--ink); margin-bottom:0.5rem; }
+.faq-item p { font-size:14px; color:var(--ink-soft); line-height:1.75; }
+
+/* ── CTA ── */
+.cta-strip {
+  background:var(--green); padding:5rem 4rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem;
+}
+.cta-strip h2 { font-family:'Cormorant Garamond', serif; font-size:clamp(28px,4vw,50px); font-weight:400; color:#fff; line-height:1.2; }
+.cta-strip h2 em { font-style:italic; }
+.btn-white { background:#fff; color:var(--dark); padding:0.9rem 2.2rem; border-radius:7px; font-size:14px; font-weight:500; text-decoration:none; transition:opacity 0.2s; font-family:'DM Sans',sans-serif; }
+.btn-white:hover { opacity:0.88; }
+
+:root { --pale:#E8F5EE; --border:rgba(0,0,0,0.09); }
+
+@media (max-width:900px) {
+  .calc-wrap { grid-template-columns:1fr; }
+  .calc-card { position:static; }
+  .page-hero { padding:8rem 1.5rem 4rem; }
+  .calc-section, .faq-section { padding:4rem 1.5rem; }
+  .faq-grid { grid-template-columns:1fr; }
+  .cta-strip { padding:4rem 1.5rem; flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><circle cx="26" cy="20" r="9" stroke="white" stroke-width="2.5" fill="none"/><line x1="23" y1="20" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="20" r="2.5" fill="#3D8B5E"/><circle cx="26" cy="20" r="2.5" fill="#3D8B5E"/></svg>
+    <div class="nav-brand">
+      <span class="nav-brand-name">F.O.G</span>
+      <span class="nav-brand-sub">Forward Observations Group</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html" class="active">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="nav-cta">Get in Touch</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-eyebrow">Pricing</div>
+  <h1>Transparent pricing.<br/><em>No surprises.</em></h1>
+  <p class="page-hero-sub">Select your services and property size to get an instant estimate. All engagements start with a free consultation.</p>
+</div>
+
+<!-- CALCULATOR -->
+<section class="calc-section">
+  <div class="calc-wrap">
+
+    <!-- LEFT -->
+    <div class="calc-explain">
+      <h2>Build your own quote</h2>
+      <p>Every hotel is different — so our pricing reflects your property's size and what you actually need. Use the calculator to get a realistic estimate before we speak.</p>
+      <p>Prices shown are ranges. The final quote depends on property complexity, number of floors, existing infrastructure, and travel requirements. For properties in the North of England, travel costs are typically minimal.</p>
+
+      <div class="calc-note">
+        <h3>What every engagement includes</h3>
+        <ul>
+          <li>On-site survey at your property</li>
+          <li>Clear written report with prioritised recommendations</li>
+          <li>Follow-up Q&A call to walk through findings</li>
+          <li>No vendor commissions — ever</li>
+          <li>First consultation always free, no commitment</li>
+        </ul>
+      </div>
+
+      <a href="contact.html" class="download-link">Book your free consultation →</a>
+    </div>
+
+    <!-- RIGHT — calculator -->
+    <div class="calc-card">
+      <h3>Pricing calculator</h3>
+      <p>Select services and property size for an estimate.</p>
+
+      <div class="size-label">Property size</div>
+      <div class="size-grid">
+        <button class="size-btn active" data-size="small" onclick="setSize(this)">
+          <span class="size-name">Small</span>
+          <span class="size-rooms">Under 50 rooms</span>
+        </button>
+        <button class="size-btn" data-size="medium" onclick="setSize(this)">
+          <span class="size-name">Medium</span>
+          <span class="size-rooms">50–100 rooms</span>
+        </button>
+        <button class="size-btn" data-size="large" onclick="setSize(this)">
+          <span class="size-name">Large</span>
+          <span class="size-rooms">100–200 rooms</span>
+        </button>
+        <button class="size-btn" data-size="group" onclick="setSize(this)">
+          <span class="size-name">Hotel group</span>
+          <span class="size-rooms">Multi-property</span>
+        </button>
+      </div>
+
+      <div class="size-label">Services</div>
+      <div class="services-list" id="servicesList"></div>
+
+      <div class="calc-divider"></div>
+
+      <div class="summary">
+        <div class="empty-msg" id="emptyMsg">Select a service to see your estimate.</div>
+        <div id="summaryRows"></div>
+        <div class="summary-total" id="totalRow" style="display:none">
+          <span>Estimated total</span>
+          <span class="total-range" id="totalText"></span>
+        </div>
+      </div>
+
+      <p class="cta-note">Estimates only. Final quotes confirmed after a free consultation call.</p>
+      <a href="contact.html" class="enquire-btn">Get a tailored quote →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-tag">Common questions</div>
+  <h2 class="section-title">Pricing FAQ</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h3>Is the first consultation really free?</h3>
+      <p>Yes, always. We'll spend 30 minutes on a call understanding your property and what you're dealing with — no charge, no commitment.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do you charge for travel?</h3>
+      <p>For properties in the North of England, travel is typically included. For sites further afield, we'll agree any travel costs upfront before work begins — no surprises.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I start with just an audit?</h3>
+      <p>Absolutely. The connectivity audit is the most common starting point. It gives you a clear picture of what you have and what you need, with no obligation to proceed further with us.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do you take commissions from vendors?</h3>
+      <p>Never. We have no vendor affiliations and take no referral fees. Every recommendation is made purely in your interest — that's the F.O.G promise.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How long does an audit take?</h3>
+      <p>Most audits are completed in one day on site, with the written report delivered within five working days. Larger or more complex properties may require two days.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What if I'm not sure what I need?</h3>
+      <p>That's exactly what the free consultation is for. Tell us what's not working and we'll advise on the right starting point — whether that's a full audit or a targeted assessment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>Not sure where to start?<br/><em>Start with a free call.</em></h2>
+  <a href="contact.html" class="btn-white">Book a free consultation →</a>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">F.O.G</div>
+    <div class="footer-sub">Forward Observations Group · Hospitality Consultants</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Forward Observations Group Ltd</div>
+</footer>
+
+<script>
+const SERVICES = [
+  { id:'audit',    name:'Connectivity Audit',         desc:'Full on-site assessment of all layers',    prices:{small:[995,1495],  medium:[1250,1750], large:[1500,2500],  group:[2500,4000]}  },
+  { id:'wifi',     name:'Wi-Fi Assessment & Design',  desc:'Coverage mapping + redesign spec',          prices:{small:[750,1250],  medium:[950,1500],  large:[1250,1750],  group:[1750,3000]}  },
+  { id:'network',  name:'Network Infrastructure',     desc:'Cabling, switching, routing review',        prices:{small:[950,1500],  medium:[1250,1750], large:[1500,2500],  group:[2000,3500]}  },
+  { id:'tv',       name:'TV System Consultation',     desc:'IPTV review + modern alternatives',         prices:{small:[650,1000],  medium:[850,1250],  large:[1000,1500],  group:[1500,2500]}  },
+  { id:'casting',  name:'Guest Casting Advisory',     desc:'Neutral platform evaluation',               prices:{small:[650,950],   medium:[750,1100],  large:[950,1400],   group:[1250,2000]}  },
+  { id:'impl',     name:'Implementation Oversight',   desc:'Project management through rollout',        prices:{small:[2500,5000], medium:[3500,7500], large:[5000,12000], group:[8000,20000]} },
+  { id:'retained', name:'Retained Advisory',          desc:'Monthly ongoing consultancy',               prices:{small:[750,1000],  medium:[1000,1500], large:[1250,2000],  group:[2000,3500]},  monthly:true },
+];
+
+let selectedSize = 'small';
+let selected = new Set();
+
+function setSize(btn) {
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedSize = btn.dataset.size;
+  updatePriceLabels();
+  updateSummary();
+}
+
+function toggleService(id, row) {
+  const cb = row.querySelector('input[type=checkbox]');
+  if (selected.has(id)) { selected.delete(id); row.classList.remove('active'); cb.checked = false; }
+  else { selected.add(id); row.classList.add('active'); cb.checked = true; }
+  updateSummary();
+}
+
+function fmt(n) { return '£' + n.toLocaleString('en-GB'); }
+
+function updatePriceLabels() {
+  SERVICES.forEach(s => {
+    const el = document.getElementById('price-' + s.id);
+    if (el) el.textContent = 'from ' + fmt(s.prices[selectedSize][0]);
+  });
+}
+
+function updateSummary() {
+  const rows  = document.getElementById('summaryRows');
+  const empty = document.getElementById('emptyMsg');
+  const total = document.getElementById('totalRow');
+  const ttext = document.getElementById('totalText');
+
+  if (selected.size === 0) {
+    empty.style.display = 'block'; rows.innerHTML = '';
+    total.style.display = 'none'; return;
+  }
+  empty.style.display = 'none';
+
+  let lo = 0, hi = 0, html = '';
+  SERVICES.forEach(s => {
+    if (!selected.has(s.id)) return;
+    const [slo, shi] = s.prices[selectedSize];
+    lo += slo; hi += shi;
+    html += `<div class="summary-row"><span>${s.name}</span><span>${fmt(slo)}–${fmt(shi)}${s.monthly ? '/mo' : ''}</span></div>`;
+  });
+  rows.innerHTML = html;
+  total.style.display = 'flex';
+  ttext.textContent = fmt(lo) + '–' + fmt(hi);
+}
+
+function renderServices() {
+  const list = document.getElementById('servicesList');
+  list.innerHTML = SERVICES.map(s => `
+    <div class="service-row" id="row-${s.id}" onclick="toggleService('${s.id}', this)">
+      <input type="checkbox" onclick="event.stopPropagation(); toggleService('${s.id}', document.getElementById('row-${s.id}'))"/>
+      <div class="svc-info">
+        <div class="svc-name">${s.name}${s.monthly ? ' <span style="font-size:10px;color:var(--ink-muted);font-weight:400">/mo</span>' : ''}</div>
+        <div class="svc-desc">${s.desc}</div>
+      </div>
+      <div class="svc-price" id="price-${s.id}"></div>
+    </div>
+  `).join('');
+  updatePriceLabels();
+}
+
+renderServices();
+updateSummary();
+
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
+</body>
+</html>
